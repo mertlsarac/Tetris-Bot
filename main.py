@@ -30,6 +30,7 @@ def play(genes):
         Tetromino.JTetromino(),
         Tetromino.LTetromino()
     ]
+    counter = 0
     while True:
         current_tetromino = random.choice(tetrominos_types)
         best_row, best_column, best_field, best_drop_score, best_rotation = field.get_optimal_drop(current_tetromino, genes)
@@ -38,7 +39,9 @@ def play(genes):
             break
         field.drop(current_tetromino, best_column)
         print(field)
+        counter += 1
         time.sleep(0.2)
+    print("Number of tetromino placed: ", counter)
 
 def bot(genes):
     pass
@@ -53,13 +56,12 @@ if __name__ == '__main__':
         print("Jenerasyon sayisini giriniz (max=10, min=1): ")
         gen_number = int(input())
 
-        assert 0 < gen_number <= 10
+        assert 1 <= gen_number <= 100
 
         population = Population()
         population.init_first()
 
-        if gen_number - 1 >= 1:
-            population.run(gen_number - 1)
+        population.run(gen_number)
 
         chromosome = population.get_fittest_member()
 

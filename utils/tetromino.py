@@ -81,7 +81,7 @@ class Tetromino():
 
     @staticmethod
     def create(letter):
-        if letter.upper() in Tetromino.TYPES[1:]:
+        if letter.upper() not in Tetromino.TYPES[1:]:
             raise ValueError('No Tetromino of type {}'.format(letter))
         return getattr(Tetromino, '{}Tetromino'.format(letter.upper()))()
 
